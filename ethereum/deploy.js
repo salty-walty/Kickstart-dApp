@@ -4,7 +4,7 @@ const compiledFactory = require('./build/CampaignFactory.json');
 
 const provider = new HDWalletProvider(
 	'YOUR SEED WORDS HERE',
-	'YOUR INFURA ENDPOINT HERE'
+	'https://YOUR INFURA ENDPOINT HERE'
 );
 
 const web3 = new Web3(provider);
