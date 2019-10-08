@@ -88,10 +88,100 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ({
+
+/***/ "./components/ContributeForm.js":
+/*!**************************************!*\
+  !*** ./components/ContributeForm.js ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/defineProperty */ "./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var semantic_ui_react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! semantic-ui-react */ "semantic-ui-react");
+/* harmony import */ var semantic_ui_react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(semantic_ui_react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _ethereum_campaign__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../ethereum/campaign */ "./ethereum/campaign.js");
+/* harmony import */ var _ethereum_web3__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../ethereum/web3 */ "./ethereum/web3.js");
+/* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../routes */ "./routes.js");
+/* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_routes__WEBPACK_IMPORTED_MODULE_5__);
+
+var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
+
+
+
+
+
+
+class ContributeForm extends react__WEBPACK_IMPORTED_MODULE_1__["Component"] {
+  constructor(...args) {
+    super(...args);
+
+    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(this, "state", {
+      value: '',
+      errorMessage: '',
+      loading: false
+    });
+
+    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(this, "onSubmit", async event => {
+      event.preventDefault();
+      const campaign = Object(_ethereum_campaign__WEBPACK_IMPORTED_MODULE_3__["default"])(this.props.address);
+      this.setState({
+        loading: true
+      });
+
+      try {
+        const accounts = await _ethereum_web3__WEBPACK_IMPORTED_MODULE_4__["default"].eth.getAccounts();
+        await campaign.methods.contribute().send({
+          from: accounts[0],
+          value: _ethereum_web3__WEBPACK_IMPORTED_MODULE_4__["default"].utils.toWei(this.state.value, 'ether')
+        });
+        _routes__WEBPACK_IMPORTED_MODULE_5__["Router"].replaceRoute(`/campaigns/${this.props.address}`);
+      } catch (err) {
+        this.setState({
+          errorMessage: err.message
+        });
+      }
+
+      this.setState({
+        loading: false,
+        value: ''
+      });
+    });
+  }
+
+  render() {
+    return __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_2__["Form"], {
+      onSubmit: this.onSubmit,
+      error: !!this.state.errorMessage
+    }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_2__["Form"].Field, null, __jsx("label", null, "Amount to Contribute"), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_2__["Input"], {
+      value: this.state.value,
+      onChange: event => this.setState({
+        value: event.target.value
+      }),
+      label: "ether",
+      labelPosition: "right"
+    }), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_2__["Message"], {
+      error: true,
+      header: "Oops!",
+      content: this.state.errorMessage
+    }), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+      primary: true,
+      loading: this.state.loading
+    }, "Contribute")));
+  }
+
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (ContributeForm);
+
+/***/ }),
 
 /***/ "./components/Layout.js":
 /*!******************************!*\
@@ -221,6 +311,47 @@ if (false) {} else {
 
 /***/ }),
 
+/***/ "./node_modules/@babel/runtime-corejs2/core-js/object/define-property.js":
+/*!*******************************************************************************!*\
+  !*** ./node_modules/@babel/runtime-corejs2/core-js/object/define-property.js ***!
+  \*******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! core-js/library/fn/object/define-property */ "core-js/library/fn/object/define-property");
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js":
+/*!***************************************************************************!*\
+  !*** ./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js ***!
+  \***************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _defineProperty; });
+/* harmony import */ var _core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core-js/object/define-property */ "./node_modules/@babel/runtime-corejs2/core-js/object/define-property.js");
+/* harmony import */ var _core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0__);
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    _core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0___default()(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+/***/ }),
+
 /***/ "./pages/campaigns/show.js":
 /*!*********************************!*\
   !*** ./pages/campaigns/show.js ***!
@@ -236,7 +367,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var semantic_ui_react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _components_Layout__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/Layout */ "./components/Layout.js");
 /* harmony import */ var _ethereum_campaign__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../ethereum/campaign */ "./ethereum/campaign.js");
+/* harmony import */ var _ethereum_web3__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../ethereum/web3 */ "./ethereum/web3.js");
+/* harmony import */ var _components_ContributeForm__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/ContributeForm */ "./components/ContributeForm.js");
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+
 
 
 
@@ -248,6 +383,7 @@ class CampaignShow extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     const summary = await campaign.methods.getSummary().call();
     console.log(summary);
     return {
+      address: props.query.address,
       minimumContribution: summary[0],
       balance: summary[1],
       requestsCount: summary[2],
@@ -271,6 +407,22 @@ class CampaignShow extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       style: {
         overflowWrap: 'break-word'
       }
+    }, {
+      header: minimumContribution,
+      meta: 'Minimum Contribution (wei)',
+      description: 'You must contribute at least this much wei to become an approver'
+    }, {
+      header: requestsCount,
+      meta: 'Number of Requests',
+      description: 'A request tries to withdraw money from the contract. Requests must be approved by approvers.'
+    }, {
+      header: approversCount,
+      meta: 'Number of Approvers',
+      description: 'Number of people who have already donated to this campaign.'
+    }, {
+      header: _ethereum_web3__WEBPACK_IMPORTED_MODULE_4__["default"].utils.fromWei(balance, 'ether'),
+      meta: 'Campaign Balance (in ether)',
+      description: 'The balance is how much money this campaign has left to spend.'
     }];
     return __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Card"].Group, {
       items: items
@@ -278,7 +430,13 @@ class CampaignShow extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   }
 
   render() {
-    return __jsx(_components_Layout__WEBPACK_IMPORTED_MODULE_2__["default"], null, __jsx("h3", null, "Campaign Show"), this.renderCards());
+    return __jsx(_components_Layout__WEBPACK_IMPORTED_MODULE_2__["default"], null, __jsx("h3", null, "Campaign Show"), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"], null, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Column, {
+      width: 10
+    }, this.renderCards()), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Column, {
+      width: 6
+    }, __jsx(_components_ContributeForm__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      address: this.props.address
+    }))));
   }
 
 }
@@ -301,7 +459,7 @@ module.exports = routes;
 
 /***/ }),
 
-/***/ 4:
+/***/ 5:
 /*!***************************************!*\
   !*** multi ./pages/campaigns/show.js ***!
   \***************************************/
@@ -310,6 +468,17 @@ module.exports = routes;
 
 module.exports = __webpack_require__(/*! /Users/walton/Desktop/Ethereum Developmet/kickstart/pages/campaigns/show.js */"./pages/campaigns/show.js");
 
+
+/***/ }),
+
+/***/ "core-js/library/fn/object/define-property":
+/*!************************************************************!*\
+  !*** external "core-js/library/fn/object/define-property" ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("core-js/library/fn/object/define-property");
 
 /***/ }),
 
