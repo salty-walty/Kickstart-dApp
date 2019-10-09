@@ -133,7 +133,8 @@ class ContributeForm extends react__WEBPACK_IMPORTED_MODULE_1__["Component"] {
       event.preventDefault();
       const campaign = Object(_ethereum_campaign__WEBPACK_IMPORTED_MODULE_3__["default"])(this.props.address);
       this.setState({
-        loading: true
+        loading: true,
+        errorMessage: ''
       });
 
       try {
@@ -369,7 +370,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ethereum_campaign__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../ethereum/campaign */ "./ethereum/campaign.js");
 /* harmony import */ var _ethereum_web3__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../ethereum/web3 */ "./ethereum/web3.js");
 /* harmony import */ var _components_ContributeForm__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/ContributeForm */ "./components/ContributeForm.js");
+/* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../routes */ "./routes.js");
+/* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_routes__WEBPACK_IMPORTED_MODULE_6__);
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
 
 
 
@@ -430,13 +434,17 @@ class CampaignShow extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   }
 
   render() {
-    return __jsx(_components_Layout__WEBPACK_IMPORTED_MODULE_2__["default"], null, __jsx("h3", null, "Campaign Show"), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"], null, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Column, {
+    return __jsx(_components_Layout__WEBPACK_IMPORTED_MODULE_2__["default"], null, __jsx("h3", null, "Campaign Show"), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"], null, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Row, null, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Column, {
       width: 10
     }, this.renderCards()), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Column, {
       width: 6
     }, __jsx(_components_ContributeForm__WEBPACK_IMPORTED_MODULE_5__["default"], {
       address: this.props.address
-    }))));
+    }))), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Row, null, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Column, null, __jsx(_routes__WEBPACK_IMPORTED_MODULE_6__["Link"], {
+      route: `/campaigns/${this.props.address}/requests/`
+    }, __jsx("a", null, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+      primary: true
+    }, "View Requests")))))));
   }
 
 }
@@ -454,7 +462,7 @@ class CampaignShow extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
 
 const routes = __webpack_require__(/*! next-routes */ "next-routes")();
 
-routes.add('/campaigns/new', 'campaigns/new').add('/campaigns/:address', '/campaigns/show');
+routes.add('/campaigns/new', 'campaigns/new').add('/campaigns/:address', '/campaigns/show').add('/campaigns/:address/requests', '/campaigns/requests/index').add('/campaigns/:address/requests/new', 'campaigns/requests/new');
 module.exports = routes;
 
 /***/ }),
